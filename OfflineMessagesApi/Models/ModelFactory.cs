@@ -28,6 +28,7 @@ namespace OfflineMessagesApi.Models
             {
                 Url = _UrlHelper.Link("GetUserById", new { id = appUser.Id }),
                 Id = appUser.Id,
+                EmailConfirmed = true,
                 UserName = appUser.UserName,
                 Roles = _AppUserManager.GetRolesAsync(appUser.Id).Result,
                 Claims = _AppUserManager.GetClaimsAsync(appUser.Id).Result

@@ -2,10 +2,7 @@
 using OfflineMessagesApi.Entities;
 using OfflineMessagesApi.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -19,7 +16,6 @@ namespace OfflineMessagesApi.Controllers
         /// Returns all the registered users in our system
         /// </summary>
         /// <returns></returns>
-        [Authorize]
         [Route("users")]
         public IHttpActionResult GetUsers()
         {
@@ -31,7 +27,6 @@ namespace OfflineMessagesApi.Controllers
         /// </summary>
         /// <param name="Id">Id"User Id</param>
         /// <returns></returns>
-        [Authorize]
         [Route("user/{id:guid}", Name = "GetUserById")]
         public async Task<IHttpActionResult> GetUser(string Id)
         {
@@ -49,7 +44,6 @@ namespace OfflineMessagesApi.Controllers
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        [Authorize]
         [Route("user/{username}")]
         public async Task<IHttpActionResult> GetUserByName(string username)
         {
@@ -70,6 +64,7 @@ namespace OfflineMessagesApi.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [Route("create")]
+        [HttpPost]
         public async Task<IHttpActionResult> CreateUser(UserModel createUserModel)
         {
             if (!ModelState.IsValid)
@@ -80,7 +75,7 @@ namespace OfflineMessagesApi.Controllers
             var user = new User()
             {
                 UserName = createUserModel.Username
-
+                
             };
 
             IdentityResult addUserResult = await this.AppUserManager.CreateAsync(user, createUserModel.Password);

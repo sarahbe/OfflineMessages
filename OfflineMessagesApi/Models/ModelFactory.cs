@@ -35,9 +35,25 @@ namespace OfflineMessagesApi.Models
             };
         }
 
+        public List<MessageReturnModel> GetMessages(List<Message> messages)
+        {
 
+            List<MessageReturnModel> messageList = new List<MessageReturnModel>();
+            foreach (Message ms in messages)
+            {
+                messageList.Add(new MessageReturnModel
+                {
+                    Body = ms.Body,
+                    SenderName = ms.Sender.UserName,
+                    Timestamp = ms.Timestamp
+                });
+            }
+            return messageList;
+        }
 
     }
+
+
 
     public class UserReturnModel
     {
@@ -56,7 +72,12 @@ namespace OfflineMessagesApi.Models
         public IList<System.Security.Claims.Claim> Claims { get; set; }
     }
 
+    public class MessageReturnModel
+    {
+        public string SenderName { get; set; }
+        public DateTime Timestamp { get; set; }
+        public string Body { get; set; }
 
-
+    }
 
 }

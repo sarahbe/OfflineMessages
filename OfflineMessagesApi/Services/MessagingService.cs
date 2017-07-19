@@ -20,7 +20,6 @@ namespace OfflineMessagesApi.Services
 
         public void CreateMessage(MessageModel message)
         {
-
             var newMessage = new Message
             {
                 ID = message.ID,
@@ -28,9 +27,15 @@ namespace OfflineMessagesApi.Services
                 RecipientId = message.ReciepentId,
                 SenderId = message.SenderId
             };
-
             _context.Messages.Add(newMessage);
             _context.SaveChanges();
         }
+
+        public List<Message> GetAllByUserId(string userId)
+        {
+            var messages = _context.Messages.Where(m => m.RecipientId == userId).OrderByDescending(m => m.Timestamp).ToList();
+            return messages;
+        }
+
     }
 }

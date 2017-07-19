@@ -21,6 +21,14 @@ namespace OfflineMessagesApi.Controllers
             _messageService = service;
         }
 
+  
+        [HttpGet]
+        [Route("GetAll")]
+        public IHttpActionResult GetMessagesByUserId(string userId)
+        {
+            var messages = _messageService.GetAllByUserId(userId);
+            return Ok(this.TheModelFactory.GetMessages(messages));
+        }
 
         [Route("Create")]
         [HttpPost]
@@ -33,10 +41,10 @@ namespace OfflineMessagesApi.Controllers
             }
             message.ReciepentId = reciepent.Id;
 
-          //  _messageService = new MessagingService(this.MessageContext);
             _messageService.CreateMessage(message);
 
             return Ok();
         }
+
     }
 }

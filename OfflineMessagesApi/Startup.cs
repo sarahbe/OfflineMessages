@@ -16,6 +16,12 @@ using System.Net.Http.Formatting;
 using System.Web;
 using System.Web.Http;
 using OfflineMessagesApi.DAL;
+using Microsoft.Practices.Unity;
+using Microsoft.AspNet.Identity;
+using OfflineMessagesApi.Services;
+using Microsoft.AspNet.Identity.EntityFramework;
+using OfflineMessagesApi.Controllers;
+using System.Data.Entity;
 
 [assembly: OwinStartup(typeof(OfflineMessagesApi.Startup))]
 namespace OfflineMessagesApi
@@ -62,6 +68,15 @@ namespace OfflineMessagesApi
         private void ConfigureWebApi(HttpConfiguration config)
         {
             config.MapHttpAttributeRoutes();
+
+            var container = new UnityContainer();
+
+            container.RegisterType<UserManager<User>>(new HierarchicalLifetimeManager());
+            container.RegisterType<IUserStore<User>, UserStore<User>>(new HierarchicalLifetimeManager());
+            container.RegisterType<DbContext, MessageContext>(new HierarchicalLifetimeManager());
+            container.RegisterType<IMessagingService, MessagingService>(new HierarchicalLifetimeManager());
+
+            config.DependencyResolver = new UnityResolver(container);
 
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

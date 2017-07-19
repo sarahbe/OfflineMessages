@@ -17,9 +17,11 @@ namespace OfflineMessagesApi.DAL
         //The static method “Create” will be called from our Owin Startup class.
         public static MessageContext Create()
         {
+            
             return new MessageContext();
         }
 
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

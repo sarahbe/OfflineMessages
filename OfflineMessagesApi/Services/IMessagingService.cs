@@ -7,7 +7,8 @@ namespace OfflineMessagesApi.Services
     public interface IMessagingService
     {
         void CreateMessage(MessageModel message);
-        List<Message> GetAllByUserId(string userId);
+        List<Message> GetReceivedMessages(string userId);
+        List<Message> GetSentMessages(string userId);
         Message GetMessage(int id);
     }
 }

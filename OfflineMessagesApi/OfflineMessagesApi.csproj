@@ -284,6 +284,10 @@
     <Compile Include="Migrations\201707200514021_upddateUserBlockTable.Designer.cs">
       <DependentUpon>201707200514021_upddateUserBlockTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707201633374_readAndReceivedColumns.cs" />
+    <Compile Include="Migrations\201707201633374_readAndReceivedColumns.Designer.cs">
+      <DependentUpon>201707201633374_readAndReceivedColumns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\ModelFactory.cs" />
@@ -384,6 +388,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707200514021_upddateUserBlockTable.resx">
       <DependentUpon>201707200514021_upddateUserBlockTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707201633374_readAndReceivedColumns.resx">
+      <DependentUpon>201707201633374_readAndReceivedColumns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

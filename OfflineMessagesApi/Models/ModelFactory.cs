@@ -41,15 +41,37 @@ namespace OfflineMessagesApi.Models
             List<MessageReturnModel> messageList = new List<MessageReturnModel>();
             foreach (Message ms in messages)
             {
+
                 messageList.Add(new MessageReturnModel
                 {
                     ID = ms.ID,
                     SenderName = ms.Sender.UserName,
-                    Timestamp = ms.Timestamp
+                    Timestamp = ms.Timestamp,
+                    Body =  ms.Body.Substring(0, Math.Min(ms.Body.Length, 5)) + "..."
                 });
             }
             return messageList;
         }
+
+        public List<SentMessageReturnModel> GetSentMessages(List<Message> messages)
+        {
+
+            List<SentMessageReturnModel> messageList = new List<SentMessageReturnModel>();
+            foreach (Message ms in messages)
+            {
+                messageList.Add(new SentMessageReturnModel
+                {
+                    ID = ms.ID,
+                    SenderName = ms.Sender.UserName,
+                    Timestamp = ms.Timestamp,
+                    ReceivedDate = ms.ReceivedDate,
+                    ReadDate = ms.ReadDate,
+                    Body = ms.Body.Substring(0, 10) + "..."
+                });
+            }
+            return messageList;
+        }
+
 
         public MessageReturnModel GetMessage(Message message)
         {
@@ -83,11 +105,21 @@ namespace OfflineMessagesApi.Models
 
     public class MessageReturnModel
     {
-        public int ID { get; set; } 
+        public int ID { get; set; }
         public string SenderName { get; set; }
         public DateTime Timestamp { get; set; }
         public string Body { get; set; }
 
+    }
+
+    public class SentMessageReturnModel
+    {
+        public int ID { get; set; }
+        public string SenderName { get; set; }
+        public DateTime Timestamp { get; set; }
+        public string Body { get; set; }
+        public DateTime? ReceivedDate { get; set; }
+        public DateTime? ReadDate { get; set; }
     }
 
 }

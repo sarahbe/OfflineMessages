@@ -40,7 +40,10 @@ namespace OfflineMessagesApi.Services
             foreach (Message message in receivedMessages)
             {
                 Message ms = _context.Messages.First(x => x.ID == message.ID);
-                ms.ReceivedDate = DateTime.Now;
+                if (ms.ReceivedDate == null)
+                {
+                    ms.ReceivedDate = DateTime.Now;
+                }
             }
             _context.SaveChanges();
         }
@@ -48,7 +51,10 @@ namespace OfflineMessagesApi.Services
         public void SetReadDate(Message message)
         {
             Message ms = _context.Messages.First(x => x.ID == message.ID);
-            ms.ReadDate = DateTime.Now;
+            if (ms.ReadDate == null)
+            {
+                ms.ReadDate = DateTime.Now;
+            }
             _context.SaveChanges();
 
         }

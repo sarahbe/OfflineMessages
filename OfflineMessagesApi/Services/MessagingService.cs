@@ -44,8 +44,12 @@ namespace OfflineMessagesApi.Services
             }
             _context.SaveChanges();
         }
-        public void SetReadDate(DateTime readDate)
+
+        public void SetReadDate(Message message)
         {
+            Message ms = _context.Messages.First(x => x.ID == message.ID);
+            ms.ReadDate = DateTime.Now;
+            _context.SaveChanges();
 
         }
 

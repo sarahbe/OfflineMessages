@@ -21,7 +21,6 @@ namespace OfflineMessagesApi.Controllers
 
         [HttpGet]
         [Route("GetReceived")]
-        //[Route("GetReceived/{userId:guid}", Name = "GetReceived")]
         public IHttpActionResult GetMessagesByUserId(string userId)
         {
             var messages = _messageService.GetReceivedMessages(userId);
@@ -31,10 +30,9 @@ namespace OfflineMessagesApi.Controllers
 
         [HttpGet]
         [Route("GetSent")]
-        //[Route("GetSent/{userId:guid}", Name = "GetSent")]
         public IHttpActionResult GetSentMessagesByUserId(string userId)
         {
-            var messages = _messageService.GetSentMessages(userId);
+            var messages = _messageService.GetSentMessages(userId);           
             return Ok(this.TheModelFactory.GetSentMessages(messages));
         }
 
@@ -48,6 +46,7 @@ namespace OfflineMessagesApi.Controllers
             {
                 return NotFound();
             }
+            _messageService.SetReadDate(message);
             return Ok(this.TheModelFactory.GetMessage(message));
         }
 

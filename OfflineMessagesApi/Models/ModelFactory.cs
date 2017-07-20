@@ -66,7 +66,7 @@ namespace OfflineMessagesApi.Models
                     Timestamp = ms.Timestamp,
                     ReceivedDate = ms.ReceivedDate,
                     ReadDate = ms.ReadDate,
-                    Body = ms.Body.Substring(0, 10) + "..."
+                    Body = ms.Body.Substring(0, Math.Min(ms.Body.Length, 5)) + "..."
                 });
             }
             return messageList;

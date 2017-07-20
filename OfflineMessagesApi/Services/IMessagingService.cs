@@ -12,6 +12,6 @@ namespace OfflineMessagesApi.Services
         List<Message> GetSentMessages(string userId);
         Message GetMessage(int id);
         void SetReceivedDate(List<Message> receivedMessages);
-        void SetReadDate(DateTime readDate);
+        void SetReadDate(Message message);
     }
 }

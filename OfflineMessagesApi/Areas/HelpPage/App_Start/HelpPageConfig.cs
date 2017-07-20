@@ -1,6 +1,6 @@
 // Uncomment the following to provide samples for PageResult<T>. Must also add the Microsoft.AspNet.WebApi.OData
 // package to your project.
-////#define Handle_PageResultOfT
+#define Handle_PageResultOfT
 
 using System;
 using System.Collections;
@@ -34,7 +34,7 @@ namespace OfflineMessagesApi.Areas.HelpPage
         public static void Register(HttpConfiguration config)
         {
             //// Uncomment the following to use the documentation from XML documentation file.
-            //config.SetDocumentationProvider(new XmlDocumentationProvider(HttpContext.Current.Server.MapPath("~/App_Data/XmlDocument.xml")));
+            config.SetDocumentationProvider(new XmlDocumentationProvider(HttpContext.Current.Server.MapPath("~/App_Data/XmlDocument.xml")));
 
             //// Uncomment the following to use "sample string" as the sample for all actions that have string as the body parameter or return type.
             //// Also, the string arrays will be used for IEnumerable<string>. The sample objects will be serialized into different media type 

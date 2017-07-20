@@ -23,11 +23,23 @@ namespace OfflineMessagesApi.Controllers
         [HttpGet]
         [Route("GetAll")]
         public IHttpActionResult GetMessagesByUserId(string userId)
-        {        
+        {
             var messages = _messageService.GetAllByUserId(userId);
             return Ok(this.TheModelFactory.GetMessages(messages));
         }
 
+        [HttpGet]
+        [Route("Get")]
+        public IHttpActionResult GetMessage(int id)
+        {
+            var message = _messageService.GetMessage(id);
+
+            if (message == null)
+            {
+                return NotFound();
+            }
+            return Ok(this.TheModelFactory.GetMessage(message));
+        }
 
         [Route("Create")]
         [HttpPost]
@@ -36,7 +48,7 @@ namespace OfflineMessagesApi.Controllers
             var reciepent = await this.AppUserManager.FindByNameAsync(message.RecipientName);
             if (reciepent == null)
             {
-                throw new ApplicationException("User is not found");
+                throw new ApplicationException("Message not found");
             }
             message.ReciepentId = reciepent.Id;
 

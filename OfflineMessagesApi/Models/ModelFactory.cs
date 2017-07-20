@@ -43,7 +43,7 @@ namespace OfflineMessagesApi.Models
             {
                 messageList.Add(new MessageReturnModel
                 {
-                    Body = ms.Body,
+                    ID = ms.ID,
                     SenderName = ms.Sender.UserName,
                     Timestamp = ms.Timestamp
                 });
@@ -51,6 +51,15 @@ namespace OfflineMessagesApi.Models
             return messageList;
         }
 
+        public MessageReturnModel GetMessage(Message message)
+        {
+            return new MessageReturnModel
+            {
+                SenderName = message.Sender.UserName,
+                Timestamp = message.Timestamp,
+                Body = message.Body
+            };
+        }
     }
 
 
@@ -74,6 +83,7 @@ namespace OfflineMessagesApi.Models
 
     public class MessageReturnModel
     {
+        public int ID { get; set; } 
         public string SenderName { get; set; }
         public DateTime Timestamp { get; set; }
         public string Body { get; set; }

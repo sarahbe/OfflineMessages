@@ -37,5 +37,10 @@ namespace OfflineMessagesApi.Services
             return messages;
         }
 
+        public Message GetMessage(int id)
+        {
+            var message = _context.Messages.First(m => m.ID == id);
+            return message;
+        }
     }
 }

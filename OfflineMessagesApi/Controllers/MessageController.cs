@@ -19,6 +19,11 @@ namespace OfflineMessagesApi.Controllers
             _blockingService = blkService;
         }
 
+        /// <summary>
+        /// Gets all received messages to the specified user.
+        /// </summary>
+        /// <param name="userId">Receipent</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetReceived")]
         public IHttpActionResult GetMessagesByUserId(string userId)
@@ -28,6 +33,11 @@ namespace OfflineMessagesApi.Controllers
             return Ok(this.TheModelFactory.GetMessages(messages));
         }
 
+        /// <summary>
+        /// Gets all sent messages from the specified user.
+        /// </summary>
+        /// <param name="userId">Sender ID</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetSent")]
         public IHttpActionResult GetSentMessagesByUserId(string userId)
@@ -36,6 +46,11 @@ namespace OfflineMessagesApi.Controllers
             return Ok(this.TheModelFactory.GetSentMessages(messages));
         }
 
+        /// <summary>
+        /// Get message by message ID. To read message.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Get")]
         public IHttpActionResult GetMessage(int id)
@@ -50,6 +65,11 @@ namespace OfflineMessagesApi.Controllers
             return Ok(this.TheModelFactory.GetMessage(message));
         }
 
+        /// <summary>
+        /// Post a new message to the system.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         [Route("Create")]
         [HttpPost]
         public async System.Threading.Tasks.Task<IHttpActionResult> CreateMessageAsync(MessageModel message)

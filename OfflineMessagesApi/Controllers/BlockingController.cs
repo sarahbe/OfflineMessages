@@ -15,6 +15,11 @@ namespace OfflineMessagesApi.Controllers
             _blockingService = service;
         }
 
+        /// <summary>
+        /// Posts a user to be blocked.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [Route("Create")]
         [HttpPost]
         public async System.Threading.Tasks.Task<IHttpActionResult> Create(UserBlockModel model)

@@ -1,10 +1,6 @@
 ﻿using OfflineMessagesApi.Models;
 using OfflineMessagesApi.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace OfflineMessagesApi.Controllers
@@ -16,12 +12,15 @@ namespace OfflineMessagesApi.Controllers
 
         private IMessagingService _messageService;
 
-        public MessageController(IMessagingService service)
+        private IBlockingService _blockingService;
+
+        public MessageController(IMessagingService msgService, IBlockingService blkService)
         {
-            _messageService = service;
+            _messageService = msgService;
+            _blockingService = blkService;
         }
 
-  
+
         [HttpGet]
         [Route("GetAll")]
         public IHttpActionResult GetMessagesByUserId(string userId)
@@ -29,6 +28,7 @@ namespace OfflineMessagesApi.Controllers
             var messages = _messageService.GetAllByUserId(userId);
             return Ok(this.TheModelFactory.GetMessages(messages));
         }
+
 
         [Route("Create")]
         [HttpPost]
@@ -41,8 +41,12 @@ namespace OfflineMessagesApi.Controllers
             }
             message.ReciepentId = reciepent.Id;
 
-            _messageService.CreateMessage(message);
+            var blocked = _blockingService.ChechUser(message.SenderId, message.ReciepentId);
 
+            if (!blocked)
+            {
+                _messageService.CreateMessage(message);
+            }
             return Ok();
         }
 

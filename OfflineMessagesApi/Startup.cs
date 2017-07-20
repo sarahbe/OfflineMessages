@@ -75,6 +75,7 @@ namespace OfflineMessagesApi
             container.RegisterType<IUserStore<User>, UserStore<User>>(new HierarchicalLifetimeManager());
             container.RegisterType<DbContext, MessageContext>(new HierarchicalLifetimeManager());
             container.RegisterType<IMessagingService, MessagingService>(new HierarchicalLifetimeManager());
+            container.RegisterType<IBlockingService, BlockingService>(new HierarchicalLifetimeManager());
 
             config.DependencyResolver = new UnityResolver(container);
 

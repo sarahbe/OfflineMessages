@@ -22,6 +22,7 @@ namespace OfflineMessagesApi.DAL
         }
 
         public DbSet<Message> Messages { get; set; }
+        public DbSet<UserBlock> UserBlocks { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

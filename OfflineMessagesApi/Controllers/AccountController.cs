@@ -84,7 +84,7 @@ namespace OfflineMessagesApi.Controllers
             {
                 return GetErrorResult(addUserResult);
             }
-
+            Log.Debug($"{user.UserName} Registered to the system.");
             Uri locationHeader = new Uri(Url.Link("GetUserById", new { id = user.Id }));
 
             return Created(locationHeader, TheModelFactory.Create(user));

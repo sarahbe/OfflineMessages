@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -13,6 +14,8 @@ namespace OfflineMessagesApi
 {
     public class GeneralExceptionHandler : ExceptionHandler
     {
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// We are throwing all our exceptions as ApplicationException. 
         /// Exceptions are sent with 406 code. For other unhandled exceptions we set code to 500. 
@@ -34,6 +37,7 @@ namespace OfflineMessagesApi
                 Content = content,
                 StatusCode = status
             };
+            Log.Error(content);
         }
         public override bool ShouldHandle(ExceptionHandlerContext context)
         {

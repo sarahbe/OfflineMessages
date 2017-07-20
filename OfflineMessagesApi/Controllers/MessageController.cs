@@ -9,7 +9,6 @@ namespace OfflineMessagesApi.Controllers
     public class MessageController : BaseApiController
     {
 
-
         private IMessagingService _messageService;
 
         private IBlockingService _blockingService;
@@ -24,7 +23,7 @@ namespace OfflineMessagesApi.Controllers
         [HttpGet]
         [Route("GetAll")]
         public IHttpActionResult GetMessagesByUserId(string userId)
-        {
+        {        
             var messages = _messageService.GetAllByUserId(userId);
             return Ok(this.TheModelFactory.GetMessages(messages));
         }
@@ -46,6 +45,8 @@ namespace OfflineMessagesApi.Controllers
             if (!blocked)
             {
                 _messageService.CreateMessage(message);
+
+                Log.Debug($"User with id {message.SenderId} sent a message to {message.RecipientName}. ");
             }
             return Ok();
         }

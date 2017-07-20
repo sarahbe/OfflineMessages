@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using log4net;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using OfflineMessagesApi.DAL;
 using OfflineMessagesApi.Entities;
@@ -14,7 +15,7 @@ namespace OfflineMessagesApi.Controllers
         private ModelFactory _modelFactory;
         private ApplicationUserManager _AppUserManager = null;
         private MessageContext ctx = null;
-
+        protected static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Read-only property

@@ -1,5 +1,4 @@
-﻿using OfflineMessagesApi.ExceptionHandling;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -13,7 +12,7 @@ namespace OfflineMessagesApi
         {
             // Web API configuration and services
             config.Services.Replace(typeof(IExceptionHandler), new GeneralExceptionHandler());
-
+            log4net.Config.XmlConfigurator.Configure();
             // Web API routes
             config.MapHttpAttributeRoutes();
 

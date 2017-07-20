@@ -22,6 +22,7 @@ using OfflineMessagesApi.Services;
 using Microsoft.AspNet.Identity.EntityFramework;
 using OfflineMessagesApi.Controllers;
 using System.Data.Entity;
+using System.Web.Http.ExceptionHandling;
 
 [assembly: OwinStartup(typeof(OfflineMessagesApi.Startup))]
 namespace OfflineMessagesApi
@@ -76,7 +77,7 @@ namespace OfflineMessagesApi
             container.RegisterType<DbContext, MessageContext>(new HierarchicalLifetimeManager());
             container.RegisterType<IMessagingService, MessagingService>(new HierarchicalLifetimeManager());
             container.RegisterType<IBlockingService, BlockingService>(new HierarchicalLifetimeManager());
-
+            config.Services.Replace(typeof(IExceptionHandler), new GeneralExceptionHandler());
             config.DependencyResolver = new UnityResolver(container);
 
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();

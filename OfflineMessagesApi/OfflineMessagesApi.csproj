@@ -261,6 +261,7 @@
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserBlock.cs" />
+    <Compile Include="ExceptionHandling\GeneralExceptionHandler.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -19,20 +19,19 @@ namespace OfflineMessagesApi.Controllers
             _blockingService = blkService;
         }
 
-
         [HttpGet]
         [Route("GetReceived")]
-        [Route("GetReceived/{userId:guid}", Name = "GetReceived")]
-        //[ActionName("GetReceived")]
+        //[Route("GetReceived/{userId:guid}", Name = "GetReceived")]
         public IHttpActionResult GetMessagesByUserId(string userId)
         {
             var messages = _messageService.GetReceivedMessages(userId);
+            _messageService.SetReceivedDate(messages);
             return Ok(this.TheModelFactory.GetMessages(messages));
         }
 
         [HttpGet]
         [Route("GetSent")]
-        [Route("GetSent/{userId:guid}", Name = "GetSent")]
+        //[Route("GetSent/{userId:guid}", Name = "GetSent")]
         public IHttpActionResult GetSentMessagesByUserId(string userId)
         {
             var messages = _messageService.GetSentMessages(userId);

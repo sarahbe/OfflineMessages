@@ -1,5 +1,6 @@
 ﻿using OfflineMessagesApi.Entities;
 using OfflineMessagesApi.Models;
+using System;
 using System.Collections.Generic;
 
 namespace OfflineMessagesApi.Services
@@ -10,5 +11,7 @@ namespace OfflineMessagesApi.Services
         List<Message> GetReceivedMessages(string userId);
         List<Message> GetSentMessages(string userId);
         Message GetMessage(int id);
+        void SetReceivedDate(List<Message> receivedMessages);
+        void SetReadDate(DateTime readDate);
     }
 }

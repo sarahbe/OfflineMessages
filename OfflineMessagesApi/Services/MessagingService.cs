@@ -35,6 +35,21 @@ namespace OfflineMessagesApi.Services
             _context.SaveChanges();
         }
 
+        public void SetReceivedDate(List<Message> receivedMessages)
+        {
+            foreach (Message message in receivedMessages)
+            {
+                Message ms = _context.Messages.First(x => x.ID == message.ID);
+                ms.ReceivedDate = DateTime.Now;
+            }
+            _context.SaveChanges();
+        }
+        public void SetReadDate(DateTime readDate)
+        {
+
+        }
+
+
         /// <summary>
         /// Get Received Messages
         /// </summary>

@@ -21,12 +21,17 @@ namespace OfflineMessagesApi.Controllers
         /// Read-only property
         /// Gets the instance of the “ApplicationUserManager” we already set in the “Startup” class, this instance will be initialized and ready to invoke.
         /// </summary>
-        protected ApplicationUserManager AppUserManager
+        public ApplicationUserManager AppUserManager
         {
             get
             {
                 return _AppUserManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
+            set
+            {
+                this._AppUserManager = value;
+            }
+            
         }
 
         /// <summary>
@@ -51,10 +56,9 @@ namespace OfflineMessagesApi.Controllers
         }
 
         /// <summary>
-        /// Read-only property
         /// This factory pattern will help us in shaping and controlling the response returned to the client
         /// </summary>
-        protected ModelFactory TheModelFactory
+        public ModelFactory TheModelFactory
         {
             get
             {
@@ -63,6 +67,9 @@ namespace OfflineMessagesApi.Controllers
                     _modelFactory = new ModelFactory(this.Request, this.AppUserManager);
                 }
                 return _modelFactory;
+            }
+            set {
+                this._modelFactory = value;
             }
         }
 

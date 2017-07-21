@@ -527,7 +527,6 @@
         </member>
         <member name="P:OfflineMessagesApi.Controllers.BaseApiController.TheModelFactory">
             <summary>
-            Read-only property
             This factory pattern will help us in shaping and controlling the response returned to the client
             </summary>
         </member>

@@ -19,20 +19,28 @@ namespace OfflineMessagesApi.Controllers.Tests
     [TestClass()]
     public class MessageControllerTests
     {
+        List<Message> allMessages;
+        User user;
+
+      [TestInitialize]
+        public void TestInitialize()
+        {
+            allMessages = new List<Message>() {
+            new Message{ID=1, Body = "First Message", RecipientId = "12", SenderId="13", Sender = new User{ Id="13" , UserName= "Sarah"} }
+            };
+            user = new User { Id = "13", UserName = "Sarah" };
+        }
 
         [TestMethod()]
         public void GetMessagesByUserIdTest()
         {
  
             var messagingServiceMock =new Mock<IMessagingService>();
-            List<Message> allMessages = new List<Message>() {
-            new Message{ID=1, Body = "First Message", RecipientId = "12", SenderId="13", Sender = new User{ Id="13" , UserName= "Sarah"} }
-            };
             messagingServiceMock.Setup(s => s.GetReceivedMessages("12"))
                 .Returns(allMessages);
 
             var blockingServiceMock = new Mock<IBlockingService>();
-            var user = new User { Id = "13" , UserName= "Sarah" };
+      
             var store = new Mock<IUserStore<User>>(MockBehavior.Strict);
             store.As<IUserStore<User>>().Setup(x => x.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(user);
             var request = new HttpRequestMessage();
@@ -50,14 +58,11 @@ namespace OfflineMessagesApi.Controllers.Tests
         public void GetMessageTest()
         {
             var messagingServiceMock = new Mock<IMessagingService>();
-            List<Message> allMessages = new List<Message>() {
-            new Message{ID=1, Body = "First Message", RecipientId = "12", SenderId="13", Sender = new User{ Id="13" , UserName= "Sarah"} }
-            };
+
             messagingServiceMock.Setup(s => s.GetReceivedMessages("12"))
                 .Returns(allMessages);
 
             var blockingServiceMock = new Mock<IBlockingService>();
-            var user = new User { Id = "13", UserName = "Sarah" };
             var store = new Mock<IUserStore<User>>(MockBehavior.Strict);
             store.As<IUserStore<User>>().Setup(x => x.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(user);
             var request = new HttpRequestMessage();
